@@ -15,6 +15,7 @@ public class GuestDao {
 		int result = 0;
 		String sql = "insert into guest values(?, ?, ?, ?, ?, ?)";
 		
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 			
@@ -36,7 +37,6 @@ public class GuestDao {
 	}
 	
 	public static String logIn(String guestId, int guestPwd) {
-		
 		Connection con = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet result = null;

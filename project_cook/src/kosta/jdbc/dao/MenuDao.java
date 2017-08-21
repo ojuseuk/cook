@@ -2,7 +2,10 @@ package kosta.jdbc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import kosta.jdbc.dto.Menu;
 import kosta.jdbc.util.DBUtil;
@@ -60,5 +63,32 @@ public class MenuDao {
 		
 		return result;
 	} // end of MenuDelete
+	
+	public static List<Menu> menuList(int cookNum) {
+		Connection con = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		List<Menu> list = new ArrayList<>();
+		
+		String sql = "select * from menu where cook_num = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, cookNum);
+			
+			result = pstmt.executeQuery();
+			
+			while (result.next()) {
+				Menu m = new Menu(result.getInt("menu_num"), result.getString("menu_name"), result.getInt("menu_price"));
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
 	
 }

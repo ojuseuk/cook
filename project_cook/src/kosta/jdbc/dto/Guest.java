@@ -11,37 +11,37 @@ public class Guest {
 		return guestId;
 	}
 	public void setGuestId(String guestId) {
-		guestId = guestId;
+		this.guestId = guestId;
 	}
 	public int getGuestPwd() {
 		return guestPwd;
 	}
 	public void setGuestPwd(int guestPwd) {
-		guestPwd = guestPwd;
+		this.guestPwd = guestPwd;
 	}
 	public String getGuestName() {
 		return guestName;
 	}
 	public void setGuestName(String guestName) {
-		guestName = guestName;
+		this.guestName = guestName;
 	}
 	public String getGuestState() {
 		return guestState;
 	}
 	public void setGuestState(String guestState) {
-		guestState = guestState;
+		this.guestState = guestState;
 	}
 	public String getGuestCity() {
 		return guestCity;
 	}
 	public void setGuestCity(String guestCity) {
-		guestCity = guestCity;
+		this.guestCity = guestCity;
 	}
 	public int getGuestMoney() {
 		return guestMoney;
 	}
 	public void setGuestMoney(int guestMoney) {
-		guestMoney = guestMoney;
+		this.guestMoney = guestMoney;
 	}
 	@Override
 	public String toString() {
@@ -50,11 +50,11 @@ public class Guest {
 	}
 	public Guest(String guestId, int guestPwd, String guestName, String guestState, String guestCity, int guestMoney) {
 		super();
-		guestId = guestId;
-		guestPwd = guestPwd;
-		guestName = guestName;
-		guestState = guestState;
-		guestCity = guestCity;
-		guestMoney = guestMoney;
+		this.guestId = guestId;
+		this.guestPwd = guestPwd;
+		this.guestName = guestName;
+		this.guestState = guestState;
+		this.guestCity = guestCity;
+		this.guestMoney = guestMoney;
 	}
 }

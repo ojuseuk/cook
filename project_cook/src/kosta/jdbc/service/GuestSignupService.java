@@ -9,17 +9,16 @@ public class GuestSignupService implements Service {
 
 	@Override
 	public void execute(Scanner sc) {
-		System.out.println("아이디, 비밀번호, 이름, 도시, 시군구, 소지금");
+		System.out.println("아이디, 비밀번호, 이름, 도시, 시군구, 소지금 입력");
 		
-		sc.nextLine();
-		String guestId = sc.nextLine();
+//		sc.nextLine();
+		String guestId = sc.next();
 		int guestPwd = sc.nextInt();
-		sc.nextLine();
-		String guestName = sc.nextLine();
-		String guestState = sc.nextLine();
-		String guestCity = sc.nextLine();
+//		sc.nextLine();
+		String guestName = sc.next();
+		String guestState = sc.next();
+		String guestCity = sc.next();
 		int guestMoney = sc.nextInt();
-		sc.nextLine();
 		
 		// DAO 클래스의 학생정보추가 메소드를 호출
 		int result = GuestDao.signUp(new Guest(guestId, guestPwd, guestName, guestState, guestCity, guestMoney));

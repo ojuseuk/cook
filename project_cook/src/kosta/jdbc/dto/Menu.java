@@ -19,6 +19,12 @@ public class Menu {
 		this.menuPrice = menuPrice;
 		this.menuFirst = menuFirst;
 	}
+	public Menu(int menuNum, String menuName, int menuPrice) {
+		super();
+		this.menuNum = menuNum;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+	}
 
 	public int getMenuNum() {
 		return menuNum;
