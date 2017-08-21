@@ -2,6 +2,7 @@ package kosta.jdbc.service;
 
 import java.util.Scanner;
 
+import kosta.jdbc.dao.MenuDao;
 import kosta.jdbc.dao.WorkerDao;
 import kosta.jdbc.dto.Menu;
 
@@ -23,7 +24,7 @@ public class MenuInsertService implements Service{
 		int menuFirst = sc.nextInt();
 		
 		Menu menu = new Menu(num, menuNum, menuName, menuPrice, menuFirst);
-		int result = WorkerDao.menuInsert(menu);
+		int result = MenuDao.menuInsert(menu);
 		
 		if(result != 0){
 			System.out.println("메뉴 추가 성공");
