@@ -17,7 +17,7 @@ public class DBUtil {
 	static {
 		try {
 			Class.forName(DRIVER_NAME);
-			
+			System.out.println("연결");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,7 +31,7 @@ public class DBUtil {
 		try {
 			
 			con = DriverManager.getConnection(CON_URL, USER_NAME, PASSWORD);
-		
+			System.out.println("디비 연결");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
