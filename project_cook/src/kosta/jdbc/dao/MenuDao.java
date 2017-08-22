@@ -78,8 +78,9 @@ public class MenuDao {
 			
 			result = pstmt.executeQuery();
 			
+			
 			while (result.next()) {
-				Menu m = new Menu(result.getInt("menu_num"), result.getString("menu_name"), result.getInt("menu_price"));
+				Menu m = new Menu(result.getInt("menu_num"), result.getInt("cook_num"),result.getString("menu_name"), result.getInt("menu_price"), result.getInt("menu_first"));
 				list.add(m);
 			}
 		} catch (SQLException e) {

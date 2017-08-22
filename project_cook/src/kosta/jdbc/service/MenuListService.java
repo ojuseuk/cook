@@ -27,14 +27,25 @@ public class MenuListService implements Service {
 		System.out.printf("%2s | %-17s | %-6s\n", "번호", "음식명", "가격");
 		System.out.println("------------------------------------");
 		
+		int a = 1;
 		for (Menu m : list) {
-			System.out.printf("%4d", m.getMenuNum());
+			System.out.printf("%4d", a++);
 			System.out.printf(" | %-10s", m.getMenuName());
 			for (int i = 0; i < 10 - m.getMenuName().length(); i++) {
 				System.out.printf(" ");
 			}
 			System.out.printf(" | %6d\n", m.getMenuPrice());
 		}
-	}
+		
+		System.out.println("메뉴를 골라 주세요.");
+		int number = sc.nextInt();
+		int menuNum = list.get(number-1).getMenuNum();
+		int cookNum = list.get(number-1).getCookNum();
+		int ratePrice = list.get(number-1).getMenuPrice();
+		
+		RatePurchase ratePurchase = new RatePurchase();
+		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId);
+		
+	} // end of execute
 
 }
