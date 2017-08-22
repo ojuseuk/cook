@@ -28,11 +28,11 @@ public class WorkerLoginMenuService implements Service {
 				break;
 			case 2 :
 				MonthProfitCheckService monthProfitCheck = new MonthProfitCheckService();
-				monthProfitCheck.execute(sc, map.get(1));
+				monthProfitCheck.execute(sc, map);
 				break;
 			case 3 :
 				MonthMarginCheckService monthMarginCheck = new MonthMarginCheckService();
-				monthMarginCheck.execute(sc, map.get(1));
+				monthMarginCheck.execute(sc, map.get(map.keySet().hashCode()));
 				break;
 			}
 			break;

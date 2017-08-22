@@ -130,34 +130,33 @@ public class WorkerDao {
 				
 	} // end of profitCheck
 	
-	public static Map<Integer, Date> profitMonthCheck(int workerNum){
+	public static Map<Integer, Integer> profitMonthCheck(int workerNum){
 		Connection con = DBUtil.getConnection();
 			
-		String sql = "select sum(profit_sales) sum, to_char(profit_day, 'MM') m from profit where cook_num = ? group by to_char(profit_day, 'MM');";
+		String sql = "select sum(profit_sales) sum, to_char(profit_day, 'MM') m from profit where cook_num = (select cook_num from worker where worker_num = ?) group by to_char(profit_day, 'MM')";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 //		List<Profit> list = new ArrayList<>();
-		Map<Integer, Date> map = new HashMap<>();
+		Map<Integer, Integer> map = new HashMap<>();
 		
 		try {
-//			System.out.println(workerNum);
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, workerNum);
 			
-			rs  =pstmt.executeQuery();
+			rs  = pstmt.executeQuery();
 			
 			String cookName = null;
 			while(rs.next()){
 //				System.out.println(rs.getInt("sum"));
-//				System.out.println(rs.getDate("m"));
-				map.put(rs.getInt("sum"), rs.getDate("m"));
+//				System.out.println((rs.getInt("m")));
+				map.put(rs.getInt("sum"), rs.getInt("m"));
 				
-//				Profit profit = new Profit();
+				Profit profit = new Profit();
 //				profit.setProfitSales(rs.getInt("sum"));
 //				System.out.println(rs.getInt("sum"));
 //				profit.setProfitMargin(rs.getInt("profit_margin"));
-//				profit.setProfitDay(rs.getDate("m"));
+//				profit.setProfitDay(rs.getInt("m"));
 //				System.out.println(rs.getDate("m"));
 //				profit.setCookName(rs.getString("cook_name"));
 //				list.add(profit);
