@@ -10,26 +10,22 @@ public class WorkerLoginService implements Service {
 
 	@Override
 	public void execute(Scanner sc) {
-		// TODO Auto-generated method stub
-//		ProfitCheckService pcs = new ProfitCheckService();
 		
 		System.out.println("직원 번호를 입력하세요");
 		Map<Integer, Integer> map = WorkerDao.workerLogin(sc.nextInt()); // 직원 번호
 		
 		Set<Integer> key = map.keySet();
-//		System.out.println("map.keySet() : " + map.keySet());
 		
 		for (Integer integer : key) {
-//			System.out.println(integer);
 			if(integer != 0){
 				System.out.println("직원 로그인 성공");
 				
 				WorkerLoginMenuService workerLoginMenu = new WorkerLoginMenuService();
 				workerLoginMenu.execute(sc, map);
 				
-				map.remove(1);
+				map.remove(0);
 				
-//				pcs.profitCheck(map.get(integer));
+				
 			}else {
 				System.out.println("직원 로그인 실패");
 			}

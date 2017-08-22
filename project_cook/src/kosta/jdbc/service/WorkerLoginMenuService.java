@@ -24,7 +24,7 @@ public class WorkerLoginMenuService implements Service {
 			switch(n2) {
 			case 1 : 
 				ProfitCheckService pcs = new ProfitCheckService();
-				pcs.profitCheck(map.get(1));
+				pcs.profitCheck(map.keySet().hashCode());
 				break;
 			case 2 :
 				MonthProfitCheckService monthProfitCheck = new MonthProfitCheckService();

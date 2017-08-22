@@ -1,6 +1,7 @@
 package kosta.jdbc.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,7 +71,7 @@ public class WorkerDao {
 				
 				map.put(workerNum, cookNum);
 			}
-			System.out.println(workerNum + "|" + cookNum);
+//			System.out.println(workerNum + "|" + cookNum);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -88,20 +89,20 @@ public class WorkerDao {
 			
 		String sql = "SELECT c.cook_name, profit_sales, profit_margin, profit_day "
 				+ "FROM profit P, cook c "
-				+ "where p.cook_num = c.cook_num and c.cook_num = ?";
+				+ "where p.cook_num = c.cook_num and c.cook_num = (select cook_num from worker where worker_num = ?)";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Profit> list = new ArrayList<>();
 //		Map<String, List<Profit>> map = new HashMap<>();
 		
 		try {
-			System.out.println(workerNum);
+//			System.out.println(workerNum);
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, workerNum);
-			
+
 			rs=pstmt.executeQuery();
-			
+
 			String cookName = null;
 			while(rs.next()){
 				Profit profit = new Profit();
@@ -129,30 +130,37 @@ public class WorkerDao {
 				
 	} // end of profitCheck
 	
-	public static List<Profit> profitMonthCheck(int workerNum){
+	public static Map<Integer, Date> profitMonthCheck(int workerNum){
 		Connection con = DBUtil.getConnection();
 			
 		String sql = "select sum(profit_sales) sum, to_char(profit_day, 'MM') m from profit where cook_num = ? group by to_char(profit_day, 'MM');";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Profit> list = new ArrayList<>();
+//		List<Profit> list = new ArrayList<>();
+		Map<Integer, Date> map = new HashMap<>();
 		
 		try {
-			System.out.println(workerNum);
+//			System.out.println(workerNum);
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, workerNum);
 			
-			rs=pstmt.executeQuery();
+			rs  =pstmt.executeQuery();
 			
 			String cookName = null;
 			while(rs.next()){
-				Profit profit = new Profit();
-				profit.setProfitSales(rs.getInt("sum"));
+//				System.out.println(rs.getInt("sum"));
+//				System.out.println(rs.getDate("m"));
+				map.put(rs.getInt("sum"), rs.getDate("m"));
+				
+//				Profit profit = new Profit();
+//				profit.setProfitSales(rs.getInt("sum"));
+//				System.out.println(rs.getInt("sum"));
 //				profit.setProfitMargin(rs.getInt("profit_margin"));
-				profit.setProfitDay(rs.getDate("m"));
+//				profit.setProfitDay(rs.getDate("m"));
+//				System.out.println(rs.getDate("m"));
 //				profit.setCookName(rs.getString("cook_name"));
-				list.add(profit);
+//				list.add(profit);
 			}
 			
 			
@@ -164,7 +172,7 @@ public class WorkerDao {
 			DBUtil.close(rs, pstmt, con);
 		}
 		
-		return list;
+		return map;
 				
 	} // end of profitMonthCheck
 	

@@ -1,7 +1,10 @@
 package kosta.jdbc.service;
 
+import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import kosta.jdbc.dao.WorkerDao;
@@ -17,9 +20,9 @@ public class MonthProfitCheckService implements Service {
 	
 	public void execute(Scanner sc, int workerNum) {
 		// TODO Auto-generated method stub
-		List<Profit> list = WorkerDao.profitMonthCheck(workerNum);
+		Map<Integer, Date> map = WorkerDao.profitMonthCheck(workerNum);
 		
-		Iterator<Profit> it = list.iterator();
+		Iterator<Entry<Integer, Date>> it = map.entrySet().iterator();
 		System.out.println(" -------------------------------------------");
 		while (it.hasNext()) {
 			Profit profit = (Profit) it.next();
