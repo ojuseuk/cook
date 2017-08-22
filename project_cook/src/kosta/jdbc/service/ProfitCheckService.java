@@ -30,13 +30,13 @@ public class ProfitCheckService implements Service {
 //		}
 //		
 		Iterator<Profit> it = list.iterator();
-		System.out.println(" --------------------------------------------------");
+		System.out.println(" -------------------------------------------");
 		while (it.hasNext()) {
 			Profit profit = (Profit) it.next();
 			
 			System.out.printf("| %-10s | %10d | %10d | %10s |", profit.getCookName(), profit.getProfitSales(), profit.getProfitMargin(), profit.getProfitDay());
 			System.out.println();
-			System.out.println(" --------------------------------------------------");
+			System.out.println(" -------------------------------------------");
 		}
 	}
 

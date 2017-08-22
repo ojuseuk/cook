@@ -129,5 +129,49 @@ public class WorkerDao {
 				
 	} // end of profitCheck
 	
+	public static List<Profit> profitMonthCheck(int workerNum){
+		Connection con = DBUtil.getConnection();
+			
+		String sql = "select sum(profit_sales) sum, to_char(profit_day, 'MM') m from profit where cook_num = ? group by to_char(profit_day, 'MM');";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Profit> list = new ArrayList<>();
+		
+		try {
+			System.out.println(workerNum);
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, workerNum);
+			
+			rs=pstmt.executeQuery();
+			
+			String cookName = null;
+			while(rs.next()){
+				Profit profit = new Profit();
+				profit.setProfitSales(rs.getInt("sum"));
+//				profit.setProfitMargin(rs.getInt("profit_margin"));
+				profit.setProfitDay(rs.getDate("m"));
+//				profit.setCookName(rs.getString("cook_name"));
+				list.add(profit);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, pstmt, con);
+		}
+		
+		return list;
+				
+	} // end of profitMonthCheck
+	
+	public static List<Profit> marginMonthCheck(int workerNum){
+		return null;
+	
+	} // end of marginMonthCheck
+	
 	
 } // end of class
