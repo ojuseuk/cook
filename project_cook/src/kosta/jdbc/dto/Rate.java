@@ -14,6 +14,7 @@ public class Rate {
 	private String 	cook_name;
 	private String menu_name;
 	private int ratePirce;
+	private int rateMargin;
 	
 	public Rate() {
 		// TODO Auto-generated constructor stub
@@ -120,13 +121,20 @@ public class Rate {
 		this.ratePirce = ratePirce;
 	}
 
+	public int getRateMargin() {
+		return rateMargin;
+	}
+
+	public void setRateMargin(int rateMargin) {
+		this.rateMargin = rateMargin;
+	}
+
 	@Override
 	public String toString() {
 		return "Rate [rate_num=" + rate_num + ", guest_id=" + guest_id + ", menu_num=" + menu_num + ", cook_num="
 				+ cook_num + ", rate_grade=" + rate_grade + ", rate_review=" + rate_review + ", rate_worker="
 				+ rate_worker + ", rate_day=" + rate_day + ", cook_name=" + cook_name + ", menu_name=" + menu_name
-				+ ", ratePirce=" + ratePirce + "]";
+				+ ", ratePirce=" + ratePirce + ", rateMargin=" + rateMargin + "]";
 	}
 
-	
 }

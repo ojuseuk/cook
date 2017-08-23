@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.w3c.dom.stylesheets.LinkStyle;
@@ -18,30 +19,37 @@ import oracle.net.aso.f;
 
 public class RateDao {
 	
-	public static int ratePurchase(int menuNum, int cookNum, int ratePrice, String guestId){
+	public static int ratePurchase(int menuNum, int cookNum, int ratePrice, String guestId, int rateMargin){
 		Connection con = DBUtil.getConnection();
 		
-		System.out.println("2:" + menuNum + " " + " " + cookNum + " " + ratePrice);
-		String sql = "insert into rate(rate_num, guest_id, menu_num, cook_num, rate_price, rate_day)"
-				+ "values(rate_seq.nextval, ?, ?, ?, ?, sysdate)";
-		PreparedStatement pstmt = null;
+		System.out.println("2:" + menuNum + " " + guestId + " " + cookNum + " " + ratePrice);
+		String sql = "{call menu_insert_proc(?, ?, ?, ?, ?, sysdate-2, ?)}";
+		CallableStatement cstmt = null;
 		int result = 0;
+		int rs = 0;
 		
 		try {
-			pstmt = con.prepareStatement(sql);
+			cstmt = con.prepareCall(sql);
 			
-			pstmt.setString(1, guestId);
-			pstmt.setInt(2, menuNum);
-			pstmt.setInt(3, cookNum);
-			pstmt.setInt(4, ratePrice);
+			Date date = new Date();
+			cstmt.setInt(1, menuNum);
+			cstmt.setInt(2, cookNum);
+			cstmt.setInt(3, ratePrice);
+			cstmt.setString(4, guestId);
+			cstmt.setInt(5, rateMargin);
 			
-			result = pstmt.executeUpdate();
+			cstmt.registerOutParameter(6, Types.INTEGER);
+			
+			rs = cstmt.executeUpdate();
+			
+			result = cstmt.getInt(6);
+			System.out.println("rateDao : " + result);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(pstmt, con);
+			DBUtil.close(cstmt, con);
 		}
 		
 		return result;

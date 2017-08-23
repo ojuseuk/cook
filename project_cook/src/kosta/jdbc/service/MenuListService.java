@@ -42,9 +42,10 @@ public class MenuListService implements Service {
 		int menuNum = list.get(number-1).getMenuNum();
 		int cookNum = list.get(number-1).getCookNum();
 		int ratePrice = list.get(number-1).getMenuPrice();
+		int rateMargin = list.get(number-1).getMenuFirst();
 		
 		RatePurchase ratePurchase = new RatePurchase();
-		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId);
+		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId, rateMargin);
 		
 	} // end of execute
 
