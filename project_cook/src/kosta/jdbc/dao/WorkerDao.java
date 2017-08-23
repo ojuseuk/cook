@@ -14,6 +14,7 @@ import org.w3c.dom.stylesheets.LinkStyle;
 
 import kosta.jdbc.dto.Menu;
 import kosta.jdbc.dto.Profit;
+import kosta.jdbc.dto.Rate;
 import kosta.jdbc.dto.Worker;
 import kosta.jdbc.util.DBUtil;
 
@@ -217,5 +218,73 @@ public class WorkerDao {
 	
 	} // end of marginMonthCheck
 	
+	public static Map<String, Integer> workerRateCheck(int workerNum) {
+		Connection con = DBUtil.getConnection();
+		
+		String sql = "select worker_name, worker_bonus from worker where worker_num = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String, Integer> map = new HashMap<>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, workerNum);
+			
+			rs  = pstmt.executeQuery();
+			
+			String cookName = null;
+			while(rs.next()){
+				map.put(rs.getString("worker_name"), rs.getInt("worker_bonus"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, pstmt, con);
+		}
+		
+		return map;
+	} // end of workerRateCheck
+	
+	public static List<Rate> cookRateCheck(int cookNum) {
+		Connection con = DBUtil.getConnection();
+		
+		String sql = "select cook_name, rate_grade, rate_review from cook c, rate r where c.cook_num = r.cook_num and c.cook_num = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+//		Map<String, Integer> map = new HashMap<>();
+		List<Rate> list = new ArrayList<>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cookNum);
+			
+			rs  = pstmt.executeQuery();
+			
+			String cookName = null;
+			while(rs.next()){
+//				map.put(rs.getString("worker_name"), rs.getInt("worker_bonus"));
+				Rate r = new Rate();
+				r.setCook_name(rs.getString("cook_name"));
+				r.setRate_grade(rs.getInt("rate_grade"));
+				r.setRate_review(rs.getString("rate_review"));
+				
+				list.add(r);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, pstmt, con);
+		}
+		
+		return list;
+	} // end of cookRateCheck
 	
 } // end of class

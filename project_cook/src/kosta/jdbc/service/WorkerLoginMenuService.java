@@ -37,7 +37,8 @@ public class WorkerLoginMenuService implements Service {
 			}
 			break;
 		case 2 :
-			
+			RateCheckService rateCheck = new RateCheckService();
+			rateCheck.execute(sc, map);
 			break;
 		case 3 :
 			MenuInsertService menuInsert = new MenuInsertService();
