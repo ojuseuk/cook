@@ -26,9 +26,6 @@ public class RateListViewService implements Service {
 		System.out.println("| 고객 아이디 | 주문 번호  | 음식점 이름    | 메뉴 이름       | 메뉴 가격  | 주문 날짜  |");
 		System.out.println(" ---------------------------------------------------------------------------------------");
 		for (Rate r : list) {
-//			System.out.format("%2d | %10s|%3s|%5s|%3s\n", c.getCookNum(), c.getCookName().trim(), c.getCookType().trim(), c.getCookState().trim(), c.getCookCity().trim());
-//			System.out.printf("%2d | %-16s | %-3s | %-5s | %-3s\n", c.getCookNum(), c.getCookName(), c.getCookType().trim(), c.getCookState().trim(), c.getCookCity().trim());
-//			System.out.printf("%s | %d | %s | %s | %d | %s\n", r.getGuest_id(), r.getMenu_num(), r.getMenu_name(), r.getCook_name(), r.getRatePirce(), r.getRate_day());
 			System.out.printf("| %-11s", r.getGuest_id());
 			System.out.printf(" | %10d", r.getRate_num());
 			
@@ -43,12 +40,25 @@ public class RateListViewService implements Service {
 			System.out.printf(" | %10d", r.getRatePirce());
 			System.out.printf(" | %-10s |\n", r.getRate_day());
 			System.out.println(" ---------------------------------------------------------------------------------------");
-//			for (int i = 0; i < 5 - r.getCook_name().length(); i++) {
-//				System.out.printf(" ");
-//			}
 		}
 		
+		System.out.print("평가할 주문번호 입력 : ");
+		int num = sc.nextInt();
 		
-	}
+		int cookNum = 0;
+		int rateNum = 0;
+		for(Rate r : list){
+			
+			if(r.getRate_num() == num){
+				cookNum = r.getCook_num();
+				rateNum = r.getRate_num();
+			}
+		}
+		
+		RateEvaluationService rateEvaluationService = new RateEvaluationService();
+		rateEvaluationService.execute(sc, cookNum, rateNum);
+		
+		
+	} // end of execute
 
-}
+} //end of class

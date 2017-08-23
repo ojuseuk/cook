@@ -1,5 +1,6 @@
 package kosta.jdbc.util;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -55,6 +56,16 @@ public class DBUtil {
 		try {
 			if(rs != null) rs.close();
 			if(pstmt !=null)pstmt.close();
+			if(con!=null) con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(CallableStatement cstmt, Connection con){
+		try {
+			if(cstmt !=null)cstmt.close();
 			if(con!=null) con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -1,13 +1,18 @@
 package kosta.jdbc.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.w3c.dom.stylesheets.LinkStyle;
+
 import kosta.jdbc.dto.Rate;
+import kosta.jdbc.dto.Worker;
 import kosta.jdbc.util.DBUtil;
 import oracle.net.aso.f;
 
@@ -48,7 +53,7 @@ public class RateDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT r.rate_num, c.cook_name, m.menu_name, r.guest_id, r.rate_price, r.rate_day, r.rate_num "
+		String sql = "SELECT r.rate_num, c.cook_name, m.menu_name, r.guest_id, r.rate_price, r.rate_day, r.rate_num, r.cook_num "
 				+ "FROM rate R, menu M, cook C WHERE R.menu_num = M.menu_num "
 				+ "AND M.cook_num = C.cook_num "
 				+ "and r.guest_id = ?";
@@ -73,6 +78,7 @@ public class RateDao {
 				rate.setRatePirce(rs.getInt("rate_price"));
 				rate.setRate_day(rs.getDate("rate_day"));
 				rate.setRate_num(rs.getInt("rate_num"));
+				rate.setCook_num(rs.getInt("cook_num"));
 				
 				list.add(rate);
 				
@@ -89,4 +95,74 @@ public class RateDao {
 		return list;
 		
 	}// end of rateListView
+	
+	public static int rateEvaluation(int rateGrade, String rateReview, String rateWorkerName, int rateNum){
+		
+		Connection con = DBUtil.getConnection();
+		System.out.println("2: " + rateGrade +" "+ rateReview + " " + rateWorkerName + " " + rateNum);
+		CallableStatement cstmt = null;
+		String sql = "{call rate_insert_proc(?, ?, ?, ?, ?)}";
+		int result = 0;
+		int rs = 0;
+		
+		try {
+			cstmt = con.prepareCall(sql);
+			
+			cstmt.setInt(1, rateNum);
+			cstmt.setInt(2, rateGrade);
+			cstmt.setString(3, rateReview);
+			cstmt.setString(4, rateWorkerName);
+			cstmt.registerOutParameter(5, Types.INTEGER);
+
+			result = cstmt.executeUpdate();
+			
+			rs = cstmt.getInt(5);
+			System.out.println("rateDao : " + rs);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(cstmt, con);
+		}
+		
+		return rs;
+		
+	} // end of rateEvaluation	
+	
+	
+	public static List<Worker> workerView(int cookNum){
+		Connection con = DBUtil.getConnection();
+		
+		String sql = "SELECT worker_name FROM worker where cook_num=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Worker> list = new ArrayList<>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cookNum);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Worker worker = new Worker();
+				
+				worker.setWorkerName(rs.getString("worker_name"));
+				
+				list.add(worker);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+	
 }
