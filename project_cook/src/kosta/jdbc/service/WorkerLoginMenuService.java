@@ -12,13 +12,13 @@ public class WorkerLoginMenuService implements Service {
 	public void execute(Scanner sc, Map<Integer, Integer> map) {
 		// TODO Auto-generated method stub
 		
-		System.out.println();
+//		System.out.println();
 		System.out.println("1. 매출확인 2. 평가확인 3. 메뉴추가 4. 메뉴삭제");
 		int n = sc.nextInt();
 		
 		switch(n) {
 		case 1 : 
-			System.out.println("1. 일별매출액 2. 월별매출액 3. 월별 순이익");
+			System.out.println("1. 일별매출액 2. 월별매출액 3. 월별순이익");
 			int n2 = sc.nextInt();
 			
 			switch(n2) {
@@ -32,7 +32,7 @@ public class WorkerLoginMenuService implements Service {
 				break;
 			case 3 :
 				MonthMarginCheckService monthMarginCheck = new MonthMarginCheckService();
-				monthMarginCheck.execute(sc, map.get(map.keySet().hashCode()));
+				monthMarginCheck.execute(sc, map);
 				break;
 			}
 			break;

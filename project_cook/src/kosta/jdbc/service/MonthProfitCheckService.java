@@ -20,20 +20,35 @@ public class MonthProfitCheckService implements Service {
 	
 	public void execute(Scanner sc, Map<Integer, Integer> wc) {
 		// TODO Auto-generated method stub
-		Map<Integer, Integer> map = WorkerDao.profitMonthCheck(wc.keySet().hashCode());
+//		Map<Integer, Integer> map = WorkerDao.profitMonthCheck(wc.keySet().hashCode());
 		
 //		System.out.println(wc.get(wc.keySet().hashCode()));
-		Iterator<Entry<Integer, Integer>> it = map.entrySet().iterator();
-		System.out.println(" -------------------------------------------");
+//		Iterator<Entry<Integer, Integer>> it = map.entrySet().iterator();
+		
+		List<Profit> list = WorkerDao.profitMonthCheck(wc.keySet().hashCode());
+		Iterator<Profit> it = list.iterator();
+		int n = 0;
 		while (it.hasNext()) {
-//			Profit profit = (Profit) it.next();
-			Entry<Integer, Integer> entry = it.next();
-			
-			System.out.printf("| %10d | %2d월 |", entry.getKey(), entry.getValue());
+			Profit profit = (Profit) it.next();
+//			Entry<Integer, Integer> entry = it.next();
+			while (n == 0) {
+				System.out.println(" -------------------------");
+				System.out.printf("| %-18s ", profit.getCookName());
+				for (int i = 0; i < 5 - profit.getCookName().length(); i++) {
+					System.out.printf(" ");
+				}
+				System.out.printf("|\n");
+				System.out.println(" -------------------------");
+				System.out.printf("| %-5s | %9s |\n", "월별매출액", "月");
+				System.out.println(" -------------------------");
+				n++;
+			}
+			System.out.printf("| %10d | %10s |", profit.getMonthProfitSum(), profit.getDal());
+//			System.out.printf("| %10d | %8d월 |", entry.getKey(), entry.getValue());
 //			System.out.printf("| %-10s | %10d | %10s |", profit.getCookName(), profit.getProfitSales(), profit.getProfitDay());
 //			System.out.printf("| %-10s | %10d | %10d | %10s |", profit.getCookName(), profit.getProfitSales(), profit.getProfitMargin(), profit.getProfitDay());
 			System.out.println();
-			System.out.println(" -------------------------------------------");
+			System.out.println(" -------------------------");
 		}
 
 	}

@@ -18,7 +18,7 @@ public class WorkerLoginService implements Service {
 		
 		for (Integer integer : key) {
 			if(integer != 0){
-				System.out.println("직원 로그인 성공");
+//				System.out.println("직원 로그인 성공");
 				
 				WorkerLoginMenuService workerLoginMenu = new WorkerLoginMenuService();
 				workerLoginMenu.execute(sc, map);

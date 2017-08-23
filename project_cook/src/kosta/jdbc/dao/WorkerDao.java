@@ -130,14 +130,14 @@ public class WorkerDao {
 				
 	} // end of profitCheck
 	
-	public static Map<Integer, Integer> profitMonthCheck(int workerNum){
+	public static List<Profit> profitMonthCheck(int workerNum){
 		Connection con = DBUtil.getConnection();
 			
-		String sql = "select sum(profit_sales) sum, to_char(profit_day, 'MM') m from profit where cook_num = (select cook_num from worker where worker_num = ?) group by to_char(profit_day, 'MM')";
+		String sql = "select cook_name, sum(profit_sales) sum, to_char(profit_day, 'MM') d from profit p, cook c where p.cook_num = c.cook_num and c.cook_num = (select cook_num from worker where worker_num = ?) group by cook_name, to_char(profit_day, 'MM')";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-//		List<Profit> list = new ArrayList<>();
-		Map<Integer, Integer> map = new HashMap<>();
+		List<Profit> list = new ArrayList<>();
+//		Map<Integer, Integer> map = new HashMap<>();
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -150,16 +150,18 @@ public class WorkerDao {
 			while(rs.next()){
 //				System.out.println(rs.getInt("sum"));
 //				System.out.println((rs.getInt("m")));
-				map.put(rs.getInt("sum"), rs.getInt("m"));
+//				map.put(rs.getInt("sum"), rs.getInt("m"));
 				
 				Profit profit = new Profit();
-//				profit.setProfitSales(rs.getInt("sum"));
+				
+				profit.setMonthProfitSum(rs.getInt("sum"));
+				profit.setDal(rs.getInt("d"));
 //				System.out.println(rs.getInt("sum"));
 //				profit.setProfitMargin(rs.getInt("profit_margin"));
 //				profit.setProfitDay(rs.getInt("m"));
 //				System.out.println(rs.getDate("m"));
-//				profit.setCookName(rs.getString("cook_name"));
-//				list.add(profit);
+				profit.setCookName(rs.getString("cook_name"));
+				list.add(profit);
 			}
 			
 			
@@ -171,12 +173,47 @@ public class WorkerDao {
 			DBUtil.close(rs, pstmt, con);
 		}
 		
-		return map;
+		return list;
 				
 	} // end of profitMonthCheck
 	
 	public static List<Profit> marginMonthCheck(int workerNum){
-		return null;
+		Connection con = DBUtil.getConnection();
+		
+		String sql = "select cook_name, sum(profit_sales) ps, sum(profit_margin) m, sum(worker_sales) ws, to_char(profit_day, 'MM') d from profit p, cook c, worker w where p.cook_num = c.cook_num and p.cook_num = w.cook_num and c.cook_num = (select cook_num from worker where worker_num = ?) group by cook_name, to_char(profit_day, 'MM')";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Profit> list = new ArrayList<>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, workerNum);
+			
+			rs  = pstmt.executeQuery();
+			
+			String cookName = null;
+			while(rs.next()){
+				Profit profit = new Profit();
+				
+				profit.setMonthProfitSum(rs.getInt("ps"));
+				profit.setMonthMarginSum(rs.getInt("m"));
+				profit.setWorkerSalesSum(rs.getInt("ws"));
+				profit.setDal(rs.getInt("d"));
+				profit.setCookName(rs.getString("cook_name"));
+				list.add(profit);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(rs, pstmt, con);
+		}
+		
+		return list;
 	
 	} // end of marginMonthCheck
 	

@@ -9,6 +9,26 @@ public class Profit {
 	private int profitMargin;
 	private Date profitDay;
 	private String cookName;
+	private int monthProfitSum;
+	private int monthMarginSum;
+	private int workerSalesSum;
+	public int getWorkerSalesSum() {
+		return workerSalesSum;
+	}
+
+	public void setWorkerSalesSum(int workerSalesSum) {
+		this.workerSalesSum = workerSalesSum;
+	}
+
+	public int getMonthMarginSum() {
+		return monthMarginSum;
+	}
+
+	public void setMonthMarginSum(int monthMarginSum) {
+		this.monthMarginSum = monthMarginSum;
+	}
+
+	private int dal;
 	
 	public Profit() {
 		// TODO Auto-generated constructor stub
@@ -25,6 +45,22 @@ public class Profit {
 	}
 
 
+
+	public int getMonthProfitSum() {
+		return monthProfitSum;
+	}
+
+	public void setMonthProfitSum(int monthProfitSum) {
+		this.monthProfitSum = monthProfitSum;
+	}
+
+	public int getDal() {
+		return dal;
+	}
+
+	public void setDal(int dal) {
+		this.dal = dal;
+	}
 
 	public int getProfitNum() {
 		return profitNum;
