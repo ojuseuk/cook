@@ -57,7 +57,7 @@ public class RateEvaluationService implements Service {
 		// 3이면 직원 이름을 입력했는데 직원이 존재 하지 않고 rate를 수정
 		
 		if(result == 0){
-			System.out.println("수정 실패");
+			System.out.println("수정에 실패하셨습니다.");
 		}else if(result == 1){
 			System.out.println("평점과 리뷰를 작성하셨습니다.");
 		}else if(result == 2){

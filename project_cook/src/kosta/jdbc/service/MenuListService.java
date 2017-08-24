@@ -17,7 +17,7 @@ public class MenuListService implements Service {
 	public void execute(Scanner sc, String guestId) {
 		// TODO Auto-generated method stub
 		System.out.println();
-		System.out.println("음식점 번호를 선택하세요");
+		System.out.println("음식점 번호를 선택해주세요");
 		int num = sc.nextInt();
 
 		List<Menu>list = MenuDao.menuList(num);
@@ -39,15 +39,15 @@ public class MenuListService implements Service {
 			System.out.println("---------------------------------------");
 		}
 		System.out.println();
-		System.out.println("구입할 메뉴 번호를 선택하세요");
+		System.out.println("구입할 메뉴 번호를 선택해주세요");
 		int number = sc.nextInt();
 		int menuNum = list.get(number-1).getMenuNum();
 		int cookNum = list.get(number-1).getCookNum();
 		int ratePrice = list.get(number-1).getMenuPrice();
 		int rateMargin = list.get(number-1).getMenuFirst();
 		
-//		RatePurchase ratePurchase = new RatePurchase();
-//		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId, rateMargin);
+		RatePurchase ratePurchase = new RatePurchase();
+		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId, rateMargin);
 		
 		TrainService train = new TrainService();
 		train.execute(sc, num, guestId);

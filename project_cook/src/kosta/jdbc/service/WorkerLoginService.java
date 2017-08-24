@@ -11,7 +11,7 @@ public class WorkerLoginService implements Service {
 	@Override
 	public void execute(Scanner sc) {
 		
-		System.out.println("직원 번호를 입력하세요");
+		System.out.println("직원 번호를 입력해주세요");
 		Map<Integer, Integer> map = WorkerDao.workerLogin(sc.nextInt()); // 직원 번호
 		
 		Set<Integer> key = map.keySet();

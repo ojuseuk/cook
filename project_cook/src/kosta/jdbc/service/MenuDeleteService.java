@@ -38,13 +38,13 @@ public class MenuDeleteService implements Service {
 		}
 		System.out.println();
 		
-		System.out.println("메뉴 번호를 입력하세요");
+		System.out.println("메뉴 번호를 입력해주세요");
 		int result = MenuDao.menuDelete(sc.nextInt());
 		
 		if(result != 0){
-			System.out.println("메뉴 삭제 성공");
+			System.out.println("메뉴 삭제에 성공하셨습니다");
 		}else {
-			System.out.println("메뉴 삭제 실패");
+			System.out.println("메뉴 삭제에 실패하셨습니다");
 		}
 		
 	}

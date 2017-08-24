@@ -15,7 +15,7 @@ public class GuestSignupService implements Service {
 
 	@Override
 	public void execute(Scanner sc) {
-		System.out.println("아이디, 비밀번호, 이름, 도시, 시군구, 소지금 입력");
+		System.out.println("아이디, 비밀번호, 이름, 도시, 시군구, 소지금 입력해주세요");
 		
 //		sc.nextLine();
 		String guestId = sc.next();
@@ -31,9 +31,9 @@ public class GuestSignupService implements Service {
 		
 		// 결과 처리
 		if(result != 0) {
-			System.out.println("고객정보 추가 성공");
+			System.out.println("고객정보 추가에 성공하셨습니다.");
 		} else {
-			System.out.println("고객정보 추가 실패");
+			System.out.println("고객정보 추가애 실패하셨습니다.");
 		}
 		
 		

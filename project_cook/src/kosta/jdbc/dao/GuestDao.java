@@ -76,13 +76,13 @@ public class GuestDao {
 				
 				byte[] pwd = Conversion.fromHex(guestSalt);
 //				pbkdf2				
-				System.out.println(guestSalt);
+//				System.out.println(guestSalt);
 				SecretKey secretKeykey = SecurityKey.excute(guestPwd.toCharArray(), pwd);
 
 				String key = Conversion.toHex(secretKeykey.getEncoded());
 				String guestKey = result.getString("guest_key");
-				System.out.println(guestKey);
-				System.out.println(key);
+//				System.out.println(guestKey);
+//				System.out.println(key);
 				
 //				base64
 //				byte[] c = Decoding.excute(pwd);

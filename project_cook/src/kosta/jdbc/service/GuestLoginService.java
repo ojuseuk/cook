@@ -12,7 +12,7 @@ public class GuestLoginService implements Service {
 		String s = null;
 		String guestId = null;
 		while (true) {
-			System.out.println("아이디, 비밀번호를 입력하세요");
+			System.out.println("아이디, 비밀번호를 입력해주세요");
 			
 			sc.nextLine();
 			guestId = sc.nextLine();
@@ -50,7 +50,7 @@ public class GuestLoginService implements Service {
 					break;
 				}
 			}catch(InputMismatchException e){
-				System.out.println("숫자만 입력해 주세요");
+				System.out.println("숫자만 입력해주세요");
 				sc.nextLine();
 			}
 		}while(num != 3);

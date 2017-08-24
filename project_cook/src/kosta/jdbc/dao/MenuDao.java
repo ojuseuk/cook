@@ -18,7 +18,7 @@ public class MenuDao {
 		String sql = "INSERT INTO menu VALUES(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println(menu.toString());
+//		System.out.println(menu.toString());
 		
 		try {
 			pstmt = con.prepareStatement(sql);

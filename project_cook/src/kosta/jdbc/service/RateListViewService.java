@@ -42,7 +42,7 @@ public class RateListViewService implements Service {
 			System.out.println(" ------------------------------------------------------------------------------------------");
 		}
 		
-		System.out.print("평가할 주문번호 입력 : ");
+		System.out.print("평가할 주문번호 입력해주세요 : ");
 		int num = sc.nextInt();
 		
 		int cookNum = 0;
