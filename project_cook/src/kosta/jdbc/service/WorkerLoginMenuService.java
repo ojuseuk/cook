@@ -46,7 +46,7 @@ public class WorkerLoginMenuService implements Service {
 			break;
 		case 4 :
 			MenuDeleteService menuDelete = new MenuDeleteService();
-			menuDelete.execute(sc);
+			menuDelete.execute(sc, map);
 			break;
 		}
 		

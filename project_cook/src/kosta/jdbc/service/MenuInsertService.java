@@ -12,15 +12,15 @@ public class MenuInsertService implements Service{
 	public void execute(Scanner sc) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("번호 입력");
+		System.out.println("메뉴 번호를 입력하세요");
 		int num = sc.nextInt();
-		System.out.println("음식점 코드 입력");
+		System.out.println("음식점 번호 입력를 입력하세요");
 		int menuNum = sc.nextInt();
-		System.out.println("요리 이름 입력");
+		System.out.println("메뉴 이름을 입력하세요");
 		String menuName = sc.next();
-		System.out.println("판매 가격 입력");
+		System.out.println("판매 가격을 입력하세요");
 		int menuPrice = sc.nextInt();
-		System.out.println("원가 입력");
+		System.out.println("원가를 입력하세요");
 		int menuFirst = sc.nextInt();
 		
 		Menu menu = new Menu(num, menuNum, menuName, menuPrice, menuFirst);
