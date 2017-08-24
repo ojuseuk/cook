@@ -7,6 +7,22 @@ public class Guest {
 	private String guestState;
 	private String guestCity;
 	private int guestMoney;
+	private String guestSalt;
+	private String guestKey;
+	
+	
+	public String getGuestSalt() {
+		return guestSalt;
+	}
+	public void setGuestSalt(String guestSalt) {
+		this.guestSalt = guestSalt;
+	}
+	public String getGuestKey() {
+		return guestKey;
+	}
+	public void setGuestKey(String guestKey) {
+		this.guestKey = guestKey;
+	}
 	public String getGuestId() {
 		return guestId;
 	}
@@ -57,4 +73,6 @@ public class Guest {
 		this.guestCity = guestCity;
 		this.guestMoney = guestMoney;
 	}
+
+	
 }

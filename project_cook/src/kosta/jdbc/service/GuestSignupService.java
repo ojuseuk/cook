@@ -2,8 +2,14 @@ package kosta.jdbc.service;
 
 import java.util.Scanner;
 
+import javax.crypto.SecretKey;
+
 import kosta.jdbc.dao.GuestDao;
 import kosta.jdbc.dto.Guest;
+import kosta.jdbc.security.Conversion;
+import kosta.jdbc.security.Encoding;
+import kosta.jdbc.security.PasswordSalt;
+import kosta.jdbc.security.SecurityKey;
 
 public class GuestSignupService implements Service {
 

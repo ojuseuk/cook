@@ -16,7 +16,7 @@ public class GuestLoginService implements Service {
 			
 			sc.nextLine();
 			guestId = sc.nextLine();
-			int guestPwd = sc.nextInt();
+			String guestPwd = sc.next();
 			
 			s = GuestDao.logIn(guestId, guestPwd);
 			
