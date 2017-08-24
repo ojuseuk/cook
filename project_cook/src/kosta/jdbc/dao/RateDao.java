@@ -104,7 +104,6 @@ public class RateDao {
 	public static int rateEvaluation(int rateGrade, String rateReview, String rateWorkerName, int rateNum){
 		
 		Connection con = DBUtil.getConnection();
-		System.out.println("2: " + rateGrade +" "+ rateReview + " " + rateWorkerName + " " + rateNum);
 		CallableStatement cstmt = null;
 		String sql = "{call rate_insert_proc(?, ?, ?, ?, ?)}";
 		int result = 0;
@@ -122,8 +121,6 @@ public class RateDao {
 			result = cstmt.executeUpdate();
 			
 			rs = cstmt.getInt(5);
-			System.out.println("rateDao : " + rs);
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

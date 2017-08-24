@@ -23,7 +23,7 @@ public class WorkerDao {
 	public static int workerSignUp(Worker worker){
 		Connection con = DBUtil.getConnection();
 		
-		String sql = "INSERT INTO worker(worker_num, cook_num, worker_name, worker_sales) VALUES(worker_seq.nextval, ?, ?, ?)";
+		String sql = "INSERT INTO worker VALUES(worker_seq.nextval, ?, ?, ?, 0)";
 		PreparedStatement pstmt = null;
 		int result = 0;
 
@@ -32,7 +32,7 @@ public class WorkerDao {
 			
 			pstmt.setInt(1, worker.getCookNum());
 			pstmt.setString(2, worker.getWorkerName());
-			pstmt.setInt(3, worker.getWorkerSales());
+			pstmt.setInt(3, worker.getWorkerSales()); 
 
 			result = pstmt.executeUpdate();
 			

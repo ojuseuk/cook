@@ -26,13 +26,20 @@ public class RateEvaluationService implements Service {
 		String rateReview = sc.nextLine();
 		System.out.println("존재하는 직원");
 		List<Worker> list = RateDao.workerView(cookNum);
-		System.out.println("  -----------------");
+		
+		for(int i=0; i<list.size(); i++){
+			System.out.print(" --------");
+		}
+		System.out.println();
 		for(Worker w : list){
-			System.out.print(" | " + w.getWorkerName());
+			System.out.print("| " + w.getWorkerName() + " ");
 			
 		}
-		System.out.println(" | ");
-		System.out.println("  -----------------");
+		System.out.println("| ");
+		for(int i=0; i<list.size(); i++){
+			System.out.print(" --------");
+		}
+		System.out.println();
 		
 		System.out.println("직원 이름을 입력해주세요");
 		String rateWorker = sc.nextLine();
@@ -43,7 +50,6 @@ public class RateEvaluationService implements Service {
 				rateWorkerName = rateWorker;
 			}
 		}
-		System.out.println("1: " + rateGrade +" "+ rateReview + " " + rateWorkerName + " " + rateNum);
 		int result = RateDao.rateEvaluation(rateGrade, rateReview, rateWorkerName, rateNum);
 		// 0이면 주문 목록에 데이터가 없는데 입력했을때
 		// 1이면 직원 이름을 입력안하고 평점과 리뷰만 넣고 rate를 수정

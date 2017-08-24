@@ -58,7 +58,7 @@ public class WorkerLoginMenuService implements Service {
 				break;
 			case 5:
 				
-				break;
+				break; 
 			default:
 				System.out.println("1~4까지 숫자만 입력해주세요");
 				break;
