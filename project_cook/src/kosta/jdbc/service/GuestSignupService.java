@@ -13,7 +13,7 @@ public class GuestSignupService implements Service {
 		
 //		sc.nextLine();
 		String guestId = sc.next();
-		int guestPwd = sc.nextInt();
+		String guestPwd = sc.next();
 //		sc.nextLine();
 		String guestName = sc.next();
 		String guestState = sc.next();

@@ -46,8 +46,11 @@ public class MenuListService implements Service {
 		int ratePrice = list.get(number-1).getMenuPrice();
 		int rateMargin = list.get(number-1).getMenuFirst();
 		
-		RatePurchase ratePurchase = new RatePurchase();
-		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId, rateMargin);
+//		RatePurchase ratePurchase = new RatePurchase();
+//		ratePurchase.execute(sc, menuNum, cookNum, ratePrice, guestId, rateMargin);
+		
+		TrainService train = new TrainService();
+		train.execute(sc, num, guestId);
 		
 	} // end of execute
 

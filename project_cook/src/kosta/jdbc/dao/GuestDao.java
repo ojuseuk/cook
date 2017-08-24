@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import kosta.jdbc.dto.Guest;
 import kosta.jdbc.util.DBUtil;
@@ -20,7 +22,7 @@ public class GuestDao {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, g.getGuestId());
-			pstmt.setInt(2, g.getGuestPwd());
+			pstmt.setString(2, g.getGuestPwd());
 			pstmt.setString(3, g.getGuestName());
 			pstmt.setString(4, g.getGuestState());
 			pstmt.setString(5, g.getGuestCity());
@@ -70,7 +72,34 @@ public class GuestDao {
 		}
 		
 		return s;
+	}
+	
+	public static Map<String, String> guestCitySearch(String guestId) {
+		Connection con = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet result = null;
+		String sql = "select guest_state, guest_city from guest where guest_id = ?";
 		
+		Map<String, String> map = new HashMap<>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, guestId);
+			
+			result  = pstmt.executeQuery();
+			
+			while (result.next()) {
+				map.put(result.getString("guest_state"), result.getString("guest_city"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(pstmt, con);
+		}
+		
+		return map;
 	}
 
 }

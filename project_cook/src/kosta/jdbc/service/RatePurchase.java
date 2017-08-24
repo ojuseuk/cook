@@ -19,11 +19,11 @@ public class RatePurchase implements Service {
 		int result = RateDao.ratePurchase(menuNum, cookNum, ratePrice, guestId, rateMargin);
 		
 		if(result == 3){
-			System.out.println("구입 성공");
-			System.out.println("음식점 수익이 증가되었습니다.");
+//			System.out.println("구입 성공");
+//			System.out.println("음식점 수익이 증가되었습니다.");
 		}else if(result == 4) {
-			System.out.println("구입 성공");
-			System.out.println("음식점 수익이 추가되었습니다.");
+//			System.out.println("구입 성공");
+//			System.out.println("음식점 수익이 추가되었습니다.");
 		}else {
 			System.out.println("구입 실패");
 		}

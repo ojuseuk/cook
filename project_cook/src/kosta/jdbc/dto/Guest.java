@@ -2,7 +2,7 @@ package kosta.jdbc.dto;
 
 public class Guest {
 	private String guestId;
-	private int guestPwd;
+	private String guestPwd;
 	private String guestName;
 	private String guestState;
 	private String guestCity;
@@ -13,10 +13,10 @@ public class Guest {
 	public void setGuestId(String guestId) {
 		this.guestId = guestId;
 	}
-	public int getGuestPwd() {
+	public String getGuestPwd() {
 		return guestPwd;
 	}
-	public void setGuestPwd(int guestPwd) {
+	public void setGuestPwd(String guestPwd) {
 		this.guestPwd = guestPwd;
 	}
 	public String getGuestName() {
@@ -48,7 +48,7 @@ public class Guest {
 		return "Guest [GuestId=" + guestId + ", GuestPwd=" + guestPwd + ", GuestName=" + guestName + ", GuestState="
 				+ guestState + ", GuestCity=" + guestCity + ", GuestMoney=" + guestMoney + "]";
 	}
-	public Guest(String guestId, int guestPwd, String guestName, String guestState, String guestCity, int guestMoney) {
+	public Guest(String guestId, String guestPwd, String guestName, String guestState, String guestCity, int guestMoney) {
 		super();
 		this.guestId = guestId;
 		this.guestPwd = guestPwd;
