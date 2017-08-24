@@ -10,9 +10,7 @@ public class WorkerSignUpService implements Service{
 	@Override
 	public void execute(Scanner sc) {
 		// TODO Auto-generated method stub
-		
-		System.out.println("번호입력");
-		int workerNum = sc.nextInt();
+
 		System.out.println("음식점 코드 입력");
 		int cookNum = sc.nextInt();
 		System.out.println("이름 입력");
@@ -20,7 +18,7 @@ public class WorkerSignUpService implements Service{
 		System.out.println("월급 입력");
 		int wrokerSales = sc.nextInt();
 		
-		Worker worker = new Worker(workerNum, cookNum, workerName, wrokerSales);
+		Worker worker = new Worker(cookNum, workerName, wrokerSales);
 		int result = WorkerDao.workerSignUp(worker);
 		
 		if(result != 0){

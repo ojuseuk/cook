@@ -23,17 +23,16 @@ public class WorkerDao {
 	public static int workerSignUp(Worker worker){
 		Connection con = DBUtil.getConnection();
 		
-		String sql = "INSERT INTO worker(worker_num, cook_num, worker_name, worker_sales) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO worker(worker_num, cook_num, worker_name, worker_sales) VALUES(worker_seq.nextval, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		int result = 0;
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, worker.getWorkerNum());
-			pstmt.setInt(2, worker.getCookNum());
-			pstmt.setString(3, worker.getWorkerName());
-			pstmt.setInt(4, worker.getWorkerSales());
+			pstmt.setInt(1, worker.getCookNum());
+			pstmt.setString(2, worker.getWorkerName());
+			pstmt.setInt(3, worker.getWorkerSales());
 
 			result = pstmt.executeUpdate();
 			

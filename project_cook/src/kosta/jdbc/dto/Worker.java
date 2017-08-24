@@ -11,9 +11,8 @@ public class Worker {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Worker(int workerNum, int cookNum, String workerName, int workerSales) {
+	public Worker(int cookNum, String workerName, int workerSales) {
 		super();
-		this.workerNum = workerNum;
 		this.cookNum = cookNum;
 		this.workerName = workerName;
 		this.workerSales = workerSales;

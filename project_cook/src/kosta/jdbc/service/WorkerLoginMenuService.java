@@ -13,44 +13,58 @@ public class WorkerLoginMenuService implements Service {
 		// TODO Auto-generated method stub
 		
 //		System.out.println();
-		System.out.println("1. 매출확인 2. 평가확인 3. 메뉴추가 4. 메뉴삭제");
-		int n = sc.nextInt();
-		
-		switch(n) {
-		case 1 : 
-			System.out.println("1. 일별매출액 2. 월별매출액 3. 월별순이익");
-			int n2 = sc.nextInt();
+		int n =0;
+		do{
+			System.out.println("1. 매출확인 2. 평가확인 3. 메뉴추가 4. 메뉴삭제 5. 기본화면으로");
+			n = sc.nextInt();
 			
-			switch(n2) {
-			case 1 : 
-				ProfitCheckService pcs = new ProfitCheckService();
-				pcs.profitCheck(map.keySet().hashCode());
+			switch(n) {
+			case 1 :
+				int n2 = 0;
+				do{
+					System.out.println("1. 일별매출액 2. 월별매출액 3. 월별순이익 4. 뒤로가기");
+					n2 = sc.nextInt();
+				
+						switch(n2) {
+						case 1 : 
+							ProfitCheckService pcs = new ProfitCheckService();
+							pcs.profitCheck(map.keySet().hashCode());
+							break;
+						case 2 :
+							MonthProfitCheckService monthProfitCheck = new MonthProfitCheckService();
+							monthProfitCheck.execute(sc, map);
+							break;
+						case 3 :
+							MonthMarginCheckService monthMarginCheck = new MonthMarginCheckService();
+							monthMarginCheck.execute(sc, map);
+							break;
+						case 4:
+							System.out.println("뒤로가기");
+							break;
+						}
+					}while(n2 < 4);
 				break;
 			case 2 :
-				MonthProfitCheckService monthProfitCheck = new MonthProfitCheckService();
-				monthProfitCheck.execute(sc, map);
+				RateCheckService rateCheck = new RateCheckService();
+				rateCheck.execute(sc, map);
 				break;
 			case 3 :
-				MonthMarginCheckService monthMarginCheck = new MonthMarginCheckService();
-				monthMarginCheck.execute(sc, map);
+				MenuInsertService menuInsert = new MenuInsertService();
+				menuInsert.execute(sc);
+				break;
+			case 4 :
+				MenuDeleteService menuDelete = new MenuDeleteService();
+				menuDelete.execute(sc);
+				break;
+			case 5:
+				
+				break;
+			default:
+				System.out.println("1~4까지 숫자만 입력해주세요");
 				break;
 			}
-			break;
-		case 2 :
-			RateCheckService rateCheck = new RateCheckService();
-			rateCheck.execute(sc, map);
-			break;
-		case 3 :
-			MenuInsertService menuInsert = new MenuInsertService();
-			menuInsert.execute(sc);
-			break;
-		case 4 :
-			MenuDeleteService menuDelete = new MenuDeleteService();
-			menuDelete.execute(sc);
-			break;
-		}
-		
-
+			
+	
+		}while(n < 5);
 	}
-
 }
