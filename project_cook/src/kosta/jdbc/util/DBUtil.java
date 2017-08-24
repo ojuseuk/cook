@@ -8,16 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
-	private static final String DRIVER_NAME="oracle.jdbc.driver.OracleDriver";
-	private static final String CON_URL="jdbc:oracle:thin:@192.168.0.114:1521:xe";
-	private static final String USER_NAME = "cook";
-	private static final String PASSWORD = "1234";
+//	private static final String DRIVER_NAME="oracle.jdbc.driver.OracleDriver";
+//	private static final String CON_URL="jdbc:oracle:thin:@192.168.0.114:1521:xe";
+//	private static final String USER_NAME = "cook";
+//	private static final String PASSWORD = "1234";
 	
 	// 클래스 로드 할때 한번만 실행 된다.
 	// 1. JDBC 드라이버 로드
 	static {
 		try {
-			Class.forName(DRIVER_NAME);
+			Class.forName(PropertiesUtil.get("DRIVER_NAME"));
 //			System.out.println("연결");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -31,7 +31,7 @@ public class DBUtil {
 		Connection con = null;
 		try {
 			
-			con = DriverManager.getConnection(CON_URL, USER_NAME, PASSWORD);
+			con = DriverManager.getConnection(PropertiesUtil.get("CON_URL"), PropertiesUtil.get("USER_NAME"), PropertiesUtil.get("PASSWORD"));
 //			System.out.println("디비 연결");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
