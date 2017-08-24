@@ -39,7 +39,7 @@ public class MenuListService implements Service {
 			System.out.println("---------------------------------------");
 		}
 		System.out.println();
-		System.out.println("메뉴 번호를 선택하세요");
+		System.out.println("구입할 메뉴 번호를 선택하세요");
 		int number = sc.nextInt();
 		int menuNum = list.get(number-1).getMenuNum();
 		int cookNum = list.get(number-1).getCookNum();

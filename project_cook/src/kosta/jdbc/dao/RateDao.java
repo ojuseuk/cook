@@ -22,7 +22,6 @@ public class RateDao {
 	public static int ratePurchase(int menuNum, int cookNum, int ratePrice, String guestId, int rateMargin){
 		Connection con = DBUtil.getConnection();
 		
-		System.out.println("2:" + menuNum + " " + guestId + " " + cookNum + " " + ratePrice);
 		String sql = "{call menu_insert_proc(?, ?, ?, ?, ?, sysdate-2, ?)}";
 		CallableStatement cstmt = null;
 		int result = 0;
@@ -31,7 +30,6 @@ public class RateDao {
 		try {
 			cstmt = con.prepareCall(sql);
 			
-			Date date = new Date();
 			cstmt.setInt(1, menuNum);
 			cstmt.setInt(2, cookNum);
 			cstmt.setInt(3, ratePrice);
@@ -43,7 +41,6 @@ public class RateDao {
 			rs = cstmt.executeUpdate();
 			
 			result = cstmt.getInt(6);
-			System.out.println("rateDao : " + result);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

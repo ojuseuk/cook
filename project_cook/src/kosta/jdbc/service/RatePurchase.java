@@ -16,15 +16,14 @@ public class RatePurchase implements Service {
 	
 	public void execute(Scanner sc, int menuNum, int cookNum, int ratePrice, String guestId, int rateMargin){
 
-		System.out.println(menuNum + " " + guestId + " " + cookNum + " " + ratePrice);
 		int result = RateDao.ratePurchase(menuNum, cookNum, ratePrice, guestId, rateMargin);
 		
 		if(result == 3){
 			System.out.println("구입 성공");
-			System.out.println("수익 업데이트");
+			System.out.println("음식점 수익이 증가되었습니다.");
 		}else if(result == 4) {
 			System.out.println("구입 성공");
-			System.out.println("수익 추가");
+			System.out.println("음식점 수익이 추가되었습니다.");
 		}else {
 			System.out.println("구입 실패");
 		}

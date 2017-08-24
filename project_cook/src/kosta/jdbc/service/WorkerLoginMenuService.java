@@ -42,7 +42,7 @@ public class WorkerLoginMenuService implements Service {
 							System.out.println("뒤로가기");
 							break;
 						}
-					}while(n2 < 4);
+					}while(n2 != 4);
 				break;
 			case 2 :
 				RateCheckService rateCheck = new RateCheckService();
@@ -65,6 +65,6 @@ public class WorkerLoginMenuService implements Service {
 			}
 			
 	
-		}while(n < 5);
+		}while(n != 5);
 	}
 }
